@@ -25,7 +25,7 @@ public class UserCommand {
 
     private UserType userType;
 
-    private Set<Contract> contracts = new HashSet<>();
+    private Set<ContractCommand> contracts = new HashSet<>();
 
-    private Set<Group> groups = new HashSet<>();
+    private Set<GroupCommand> groups = new HashSet<>();
 }

@@ -17,5 +17,5 @@ public class GroupCommand {
 
     private String name;
 
-    private Set<User> users = new HashSet<>();
+    private Set<UserCommand> users = new HashSet<>();
 }

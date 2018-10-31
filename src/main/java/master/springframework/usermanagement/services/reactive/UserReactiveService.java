@@ -49,7 +49,7 @@ public class UserReactiveService implements UserService {
 
     @Override
     public Mono<Void> deleteById(String idToDelete) {
-        userReactiveRepository.deleteById(idToDelete);
+        userReactiveRepository.deleteById(idToDelete).block();
         return Mono.empty();
     }
 }
