@@ -20,7 +20,7 @@ public class IndexController {
     public String getIndexPage(Model model) {
         log.debug("Getting Index page");
 
-        model.addAttribute("users", userService.getUsers().collectList().block());
+        model.addAttribute("users", userService.getUsers());
 
         return "index";
     }

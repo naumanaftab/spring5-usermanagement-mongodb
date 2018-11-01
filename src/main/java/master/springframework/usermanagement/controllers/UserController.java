@@ -27,7 +27,7 @@ public class UserController {
 
     @GetMapping("/user/{id}/show")
     public String showById(@PathVariable String id, Model model) {
-        model.addAttribute("user", userService.getById(id).block());
+        model.addAttribute("user", userService.getById(id));
         return "user/show";
     }
 
@@ -39,7 +39,7 @@ public class UserController {
 
     @GetMapping("user/{id}/update")
     public String updateUser(@PathVariable String id, Model model){
-        model.addAttribute("user", userService.getById(id).block());
+        model.addAttribute("user", userService.getById(id));
         return USER_FORM_URL;
     }
 
