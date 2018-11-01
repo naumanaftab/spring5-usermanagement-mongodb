@@ -12,11 +12,11 @@ import java.io.IOException;
 
 @Slf4j
 @Service
-public class ImageServiceImpl implements ImageService {
+public class ImageReactiveServiceImpl implements ImageService {
 
     private final UserReactiveRepository userReactiveRepository;
 
-    public ImageServiceImpl(UserReactiveRepository userReactiveRepository) {
+    public ImageReactiveServiceImpl(UserReactiveRepository userReactiveRepository) {
         this.userReactiveRepository = userReactiveRepository;
     }
 

@@ -31,4 +31,9 @@ public class User {
     @DBRef
     private Set<Group> groups = new HashSet<>();
 
+    public User addGroup(Group group){
+        this.groups.add(group);
+        return this;
+    }
+
 }
