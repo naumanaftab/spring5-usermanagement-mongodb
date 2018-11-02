@@ -6,6 +6,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Getter
@@ -16,6 +18,8 @@ public class Group {
     @Id
     private String id;
 
+    @NotBlank
+    @Min(3)
     private String name;
 
     @DBRef

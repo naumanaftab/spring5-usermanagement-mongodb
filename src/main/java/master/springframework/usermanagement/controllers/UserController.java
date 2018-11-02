@@ -2,14 +2,15 @@ package master.springframework.usermanagement.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import master.springframework.usermanagement.commands.UserCommand;
+import master.springframework.usermanagement.exceptions.NotFoundException;
 import master.springframework.usermanagement.services.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.exceptions.TemplateInputException;
 
 import javax.validation.Valid;
 
@@ -21,8 +22,15 @@ public class UserController {
 
     private final UserService userService;
 
+    private WebDataBinder webDataBinder;
+
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+    @InitBinder("group")
+    public void initBinder(WebDataBinder webDataBinder){
+        this.webDataBinder = webDataBinder;
     }
 
     @GetMapping("/user/{id}/show")
@@ -44,7 +52,9 @@ public class UserController {
     }
 
     @PostMapping("user")
-    public String saveOrUpdate(@Valid @ModelAttribute("user") UserCommand command, BindingResult bindingResult){
+    public String saveOrUpdate(@ModelAttribute("user") UserCommand command){
+        webDataBinder.validate();
+        BindingResult bindingResult = webDataBinder.getBindingResult();
 
         if(bindingResult.hasErrors()){
 
@@ -67,5 +77,17 @@ public class UserController {
 
         userService.deleteById(id);
         return "redirect:/";
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler({NotFoundException.class, TemplateInputException.class})
+    public String handleNotFound(Exception exception, Model model){
+
+        log.error("Handling not found exception");
+        log.error(exception.getMessage());
+
+        model.addAttribute("exception", exception);
+
+        return "404Error";
     }
 }

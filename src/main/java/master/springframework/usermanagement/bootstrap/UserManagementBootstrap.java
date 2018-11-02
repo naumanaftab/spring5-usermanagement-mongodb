@@ -21,7 +21,7 @@ import java.util.Optional;
 @Component
 public class UserManagementBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
-    private final GroupRepository groupRepository;
+        private final GroupRepository groupRepository;
     private final ContractRepository contractRepository;
     private final UserRepository userRepository;
 

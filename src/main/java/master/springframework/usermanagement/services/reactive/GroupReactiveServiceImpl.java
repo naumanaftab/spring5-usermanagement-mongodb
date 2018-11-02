@@ -100,7 +100,7 @@ public class GroupReactiveServiceImpl implements GroupService {
     }
 
     @Override
-    public Mono<Void> deleteById(String userId, String idToDelete) {
+    public Mono<Void>   deleteById(String userId, String idToDelete) {
         log.debug("Deleting group: " + userId + ":" + idToDelete);
 
         User user = userRepository.findById(userId).block();
