@@ -27,11 +27,13 @@ public class GroupReactiveRepositoryIT {
         Group group = new Group();
         group.setName("production");
 
-        groupReactiveRepository.save(group).block();
+        Group savedGroup = groupReactiveRepository.save(group).block();
 
         Long count = groupReactiveRepository.count().block();
 
         Assert.assertEquals(Long.valueOf(1L), count);
+        Assert.assertNotNull(savedGroup.getId());
+        Assert.assertEquals(savedGroup.getName(), "production");
     }
 
 }
